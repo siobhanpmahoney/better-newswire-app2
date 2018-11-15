@@ -115,15 +115,17 @@ class App extends Component {
 
     return ( <div className="App">
     <NavBar/>
-    <div className="page-wrapper"> 
-    <SidebarContainer articleIDs={this.state.articleIDs} viewed={viewed} bookmarks={bookmarks}/>
+    <div className="page-wrapper">
+    <SidebarContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} interests={this.state.interests} onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} />
     <Switch>
       <Route exact="exact" path='/latest' render={() => {
-          return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList} onToggleBookmark={this.onToggleBookmark}/>
+          return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
+            onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
         }}/>
 
         <Route exact="exact" path='/recommended' render={() => {
-            return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList} onToggleBookmark={this.onToggleBookmark}/>
+            return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
+              onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
           }}/>
 
           <Redirect to='/latest'/>
