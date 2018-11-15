@@ -26,19 +26,17 @@ class ArticleItem extends React.Component {
     const articleDate = `${(new Date(this.props.article.updated_date)).getMonth() + 1}/${(new Date(this.props.article.updated_date)).getDate()}/${(new Date(this.props.article.updated_date)).getFullYear()}`;
 
     return (
-      <div className="wire-item-container-block-wrapper">
-        <div className="wire-item-container">
+      <div className="article-item-wrapper">
+        <div className="article-item-container">
 
-          <div className="wire-item-img-section">
+          <div className="article-item-img-section">
+            <img src={this.props.article.image} alt="" className="article-item-img" />
 
-            {this.props.article.multimedia &&
-              <img src={this.props.article.image} alt="" className="wire-item-img" />
-            }
 
 
           </div>
 
-          <div className="wire-item-all-text">
+          <div className="article-item-all-text">
             <div className="wire-item-section">
               {this.props.article.section}
             </div>

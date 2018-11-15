@@ -115,6 +115,7 @@ class App extends Component {
 
     return ( <div className="App">
     <NavBar/>
+    <div className="page-wrapper"> 
     <SidebarContainer articleIDs={this.state.articleIDs} viewed={viewed} bookmarks={bookmarks}/>
     <Switch>
       <Route exact="exact" path='/latest' render={() => {
@@ -128,6 +129,7 @@ class App extends Component {
           <Redirect to='/latest'/>
 
         </Switch>
+        </div>
 
       </div> );
     }

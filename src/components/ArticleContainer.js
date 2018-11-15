@@ -14,9 +14,9 @@ class ArticleContainer extends React.Component {
   let {articleIDs, viewed, bookmarks} = this.props
 
     return (
-      <div>
+      <div className="article-container-wrapper">
         {this.props.sections.map((sec) => {
-          return <ArticleList section={sec} onToggleBookmark={this.props.onToggleBookmark}  articleIDs={this.props.articleIDs} viewed={this.props.viewed} bookmarks={this.props.bookmarks} />
+          return <ArticleList section={sec} title={sec =="all" ? "latest" : sec} onToggleBookmark={this.props.onToggleBookmark}  articleIDs={this.props.articleIDs} viewed={this.props.viewed} bookmarks={this.props.bookmarks} />
         })}
       </div>
     )

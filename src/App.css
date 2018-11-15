@@ -1,26 +1,15 @@
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
 .App {
-  text-align: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -29,4 +18,73 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.page-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar-container-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  flex: 1 1 auto;
+  width: 28%;
+}
+
+.article-container-wrapper {
+  display: flex;
+  flex-flow: column wrap;
+  flex: 1 1 auto;
+  width: 70%;
+}
+
+
+.article-item-wrapper {
+  display: block;
+  position: relative;
+  margin: 24px 6px;
+  width: 100%;
+  height: auto;
+  /* box-shadow: 0 6px 15px rgba(36,37,38,.08); */
+  border-bottom: solid 1px #d4cfcf;
+
+}
+
+.article-item-container {
+  position: relative;
+  padding: 20px 8px;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  height: auto;
+}
+
+.article-item-img-section {
+  width: 200px;
+  height: 150px;
+  display: flex;
+  position: relative;
+  flex: 1 1 auto;
+
+}
+
+.article-item-img {
+  width: auto;
+  height: 100%;
+  position: relative;
+
+}
+
+.article-item-all-text {
+  width: 60%;
+  display: flex;
+  position: relative;
+  flex: 1 1 auto;
+  flex-flow: column nowrap;
 }

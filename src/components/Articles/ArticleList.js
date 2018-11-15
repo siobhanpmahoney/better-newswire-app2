@@ -51,14 +51,10 @@ class ArticleList extends React.Component {
 
 
   render() {
-    console.log("bookmarks: ", this.props.articleIDs)
     return (
-      <div><h2>ArticleList!!!</h2>
+      <div className="article-list">
+        <span className="list-title">{this.props.title.toUpperCase()}</span>
       {this.renderFeed().map((a) => {
-        console.log("in list map")
-        console.log("articleIds: ", this.props.articleIDs)
-        console.log("a.slug_name: ", a.slug_name)
-        console.log("article in articleIds?", !!this.props.articleIDs[a.slug_name] && this.props.articleIDs[a.slug_name] == "bookmarked")
         return <ArticleItem article={a} onToggleBookmark={this.props.onToggleBookmark} bookmarked={!!this.props.articleIDs[a.slug_name] && this.props.articleIDs[a.slug_name] == "bookmarked"}/>
       })}
     </div>
