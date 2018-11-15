@@ -5,7 +5,17 @@ export const fetchArticles = (section) => {
     fetch(`https://api.nytimes.com/svc/news/v3/content/all/${section}.json?api-key=${nytimes_key}`)
     .then(response => response.json())
     .then(json => resolve(json.results.map((article) => {
-      return {slug_name: article.slug_name, section: article.section, abstract: article.abstract, title: article.title, url: article.url, updated_date:	article.updated_date, image: article.multimedia[3].url}
+      let imgSrc
+      article.multimedia && article.multimedia[3] ? imgSrc = article.multimedia[3].url : imgSrc = null
+      return {
+        slug_name: article.slug_name,
+        section: article.section,
+        abstract: article.abstract,
+        title: article.title,
+        url: article.url,
+        updated_date:	article.updated_date,
+        image: imgSrc
+      }
     })))
   })
 }

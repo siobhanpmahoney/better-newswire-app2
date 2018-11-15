@@ -2,20 +2,27 @@ import React from 'react'
 
 class ArticleItem extends React.Component {
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.bookmarked != this.props.bookmarked) {
+      this.dynamicIcon();
+    }
+  }
+
   _onToggleBookmark = () => {
     this.props.onToggleBookmark(this.props.article)
   }
 
   dynamicIcon = () => {
-  if (this.props.bookmarked) {
-    return (<i className="material-icons bookmark" id={this.props.article.slug_name}>bookmark</i>)
-  } else {
-    return (<i className="material-icons bookmark_border" id={this.props.article.slug_name} className={this.props.article.section}>bookmark_border</i>)
+    if (this.props.bookmarked) {
+      return (<i className="material-icons bookmark" id={this.props.article.slug_name}>bookmark</i>)
+    } else {
+      return (<i className="material-icons bookmark_border" id={this.props.article.slug_name}>bookmark_border</i>)
+    }
   }
-}
 
 
   render() {
+    console.log("item bookmarked?", this.props.bookmarked)
     const articleDate = `${(new Date(this.props.article.updated_date)).getMonth() + 1}/${(new Date(this.props.article.updated_date)).getDate()}/${(new Date(this.props.article.updated_date)).getFullYear()}`;
 
     return (

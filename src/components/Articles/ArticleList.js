@@ -18,6 +18,18 @@ class ArticleList extends React.Component {
     }, this.startInterval))
   }
 
+  componentDidUpdate(prevProps) {
+    if ((Object.keys(prevProps.articleIDs) != Object.keys(this.props.articleIDs)) || (prevProps.bookmarked.length != this.props.bookmarked.length) || prevProps.viewed.length != this.props.viewed.length) {
+      this.renderFeed()
+    }
+  }
+
+  renderFeed = () => {
+    return this.state.feed
+  }
+
+
+
   updateFeedState = () => {
     fetchArticles(this.props.section)
     .then(json => {
@@ -39,10 +51,15 @@ class ArticleList extends React.Component {
 
 
   render() {
+    console.log("bookmarks: ", this.props.articleIDs)
     return (
       <div><h2>ArticleList!!!</h2>
-      {this.state.feed.map((a) => {
-        return <ArticleItem article={a} onToggleBookmark={this.props.onToggleBookmark} bookmarked={!!this.props.bookmarks[a.slug_name] && this.props.bookmarks[a.slug_name] == "bookmarked"}/>
+      {this.renderFeed().map((a) => {
+        console.log("in list map")
+        console.log("articleIds: ", this.props.articleIDs)
+        console.log("a.slug_name: ", a.slug_name)
+        console.log("article in articleIds?", !!this.props.articleIDs[a.slug_name] && this.props.articleIDs[a.slug_name] == "bookmarked")
+        return <ArticleItem article={a} onToggleBookmark={this.props.onToggleBookmark} bookmarked={!!this.props.articleIDs[a.slug_name] && this.props.articleIDs[a.slug_name] == "bookmarked"}/>
       })}
     </div>
   )
