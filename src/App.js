@@ -116,7 +116,7 @@ class App extends Component {
     return ( <div className="App">
     <NavBar/>
     <div className="page-wrapper">
-    <SidebarContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} interests={this.state.interests} onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} />
+
     <Switch>
       <Route exact="exact" path='/latest' render={() => {
           return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
@@ -131,6 +131,7 @@ class App extends Component {
           <Redirect to='/latest'/>
 
         </Switch>
+            <SidebarContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} interests={this.state.interests} onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} />
         </div>
 
       </div> );
