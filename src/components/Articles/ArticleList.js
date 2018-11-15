@@ -36,7 +36,7 @@ class ArticleList extends React.Component {
       let feedState = [...this.state.feed]
       json.forEach((article) => {
         if (!feedState.find((a) => a.slug_name == article.slug_name)) {
-          feedState.push(article)
+          feedState.unshift(article)
         }
       })
       this.setState({

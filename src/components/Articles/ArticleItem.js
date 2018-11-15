@@ -37,25 +37,25 @@ class ArticleItem extends React.Component {
           </div>
 
           <div className="article-item-all-text">
-            <div className="wire-item-section">
+            <div className="article-item-section">
               {this.props.article.section}
             </div>
 
-            <div className="wire-item-title" id={this.props.article.slug_name} onClick={this.props.viewArticle}>
+            <div className="article-item-title" id={this.props.article.slug_name} onClick={this.props.viewArticle}>
               {this.props.article.title}
             </div>
 
-            <div className="wire-item-abstract">
+            <div className="article-item-abstract">
               {this.props.article.abstract}
             </div>
 
-            <div className="wire-item-bottom">
-              <div className="wire-item-date">
+            <div className="article-item-bottom">
+              <span className="article-item-date">
                 {articleDate}
-              </div>
+              </span>
 
-              <span className="wire-item-buttons">
-                <button className="readLater" id={this.props.article.slug_name} className={this.props.article.section} onClick={this._onToggleBookmark}>
+              <span className="article-item-buttons">
+                <button className="readLater" id={this.props.article.slug_name} className="bookmark-feed-item-button" onClick={this._onToggleBookmark}>
                   {this.dynamicIcon()}
                 </button>
               </span>
