@@ -116,12 +116,12 @@ class App extends Component {
     <div className="page-wrapper">
 
       <Switch>
-        <Route exact="exact" path='/latest' render={() => {
+        <Route exact path='/latest' render={() => {
             return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewedIDs={this.state.viewedIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={["all"]}
               onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} updateWireType={this.updateWireType}/>
           }}/>
 
-          <Route exact="exact" path='/recommended' render={() => {
+        <Route exact path='/recommended' render={() => {
               return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewed={this.state.viewed} viewedIDs={this.state.viewedIDs} bookmarks={this.state.bookmarks} sections={Object.keys(this.state.interests)}
                 onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} updateWireType={this.updateWireType}/>
             }}/>

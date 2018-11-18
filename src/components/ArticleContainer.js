@@ -22,7 +22,7 @@ class ArticleContainer extends React.Component {
     return (
       <div className="article-container-wrapper">
         {this.props.sections.map((sec) => {
-          return <ArticleList section={sec} title={sec =="all" ? "latest" : sec} onToggleBookmark={this.props.onToggleBookmark}  bookmarkIDs={this.props.bookmarkIDs} viewed={this.props.viewed} bookmarks={this.props.bookmarks} onViewArticle={this.props.onViewArticle}/>
+          return <ArticleList key={sec} section={sec} title={sec =="all" ? "latest" : sec} onToggleBookmark={this.props.onToggleBookmark}  bookmarkIDs={this.props.bookmarkIDs} viewed={this.props.viewed} bookmarks={this.props.bookmarks} onViewArticle={this.props.onViewArticle}/>
         })}
       </div>
     )

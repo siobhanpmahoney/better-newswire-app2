@@ -22,16 +22,27 @@ class ArticleList extends React.Component {
     }, this.startInterval))
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if ((Object.keys(prevProps.bookmarkIDs) != Object.keys(this.props.bookmarkIDs)) || (prevProps.bookmarked.length != this.props.bookmarked.length) || prevProps.viewed.length != this.props.viewed.length) {
       this.renderFeed()
     }
-    if (prevProps.title != this.props.title) {
+    if (prevProps.location.pathname != this.props.location.pathname) {
       this.setState({
         feed: [],
         isDisplayingList: true
-      }, this.updateFeedState)
+      }, this.startInterval)
     }
+
+    if (prevState.feed.length != this.state.feed.length) {
+      console.log("FEEDUPDATE")
+      console.log("section: ", this.props.title)
+      console.log("previous feed count: ", prevState.feed.length)
+      console.log("current feed count: ", this.state.feed.length)
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   renderFeed = () => {
@@ -81,7 +92,7 @@ class ArticleList extends React.Component {
         </span>
         <div className="article-list" style={{display: `${display}`}}>
       {this.renderFeed().map((a) => {
-        return <ArticleItem article={a} on onToggleBookmark={this.props.onToggleBookmark} onViewArticle={this.props.onViewArticle} bookmarked={!!this.props.bookmarkIDs[a.slug_name]}/>
+        return <ArticleItem key={a.slug_name + " " + a.updated_date} article={a} onToggleBookmark={this.props.onToggleBookmark} onViewArticle={this.props.onViewArticle} bookmarked={!!this.props.bookmarkIDs[a.slug_name]}/>
 
       })}
               </div>
@@ -90,4 +101,4 @@ class ArticleList extends React.Component {
 }
 }
 
-export default ArticleList
+export default withRouter(ArticleList)

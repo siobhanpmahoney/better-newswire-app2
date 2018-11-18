@@ -18,7 +18,7 @@ class BookmarkItem extends React.Component {
     return (
       <div className="bookmark-item-wrapper">
         <div className="bookmark-img-section">
-          <img src={bookmark.image} className="bookmark-img" />
+          <img src={bookmark.image} className="bookmark-img" alt="img" />
         </div>
         <div className="bookmark-item-top">
           <span className="bookmark-item-section">{bookmark.section}</span>

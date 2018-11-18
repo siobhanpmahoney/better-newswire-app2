@@ -10,7 +10,7 @@ class ViewedList extends React.Component {
       <div className="sidebar-header">History</div>
       <ol className="viewed-list-ol">
         {this.props.viewed.map((item) => {
-          return <ViewedItem viewedItem={item} key={item.slug} onViewArticle={this.onViewArticle} />
+          return <ViewedItem viewedItem={item} key={item.slug_name} onViewArticle={this.onViewArticle} />
         })}
       </ol>
       </div>

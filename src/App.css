@@ -133,7 +133,7 @@ div.bookmark-item-wrapper:hover .bookmark-item-top .bookmark-item-button button 
   font-size: 14px;
   margin: 8px 0px;
   height: 100%;
-  max-height: 78px;
+  /* max-height: 78px; */
   line-height: 18px;
   font-weight: 500;
 }
