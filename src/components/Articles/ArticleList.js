@@ -17,7 +17,8 @@ class ArticleList extends React.Component {
   componentDidMount() {
     fetchArticles(this.props.section)
     .then(json => this.setState({
-      feed: json
+      feed: json,
+      isDisplayingList: true
     }, this.startInterval))
   }
 
@@ -27,7 +28,8 @@ class ArticleList extends React.Component {
     }
     if (prevProps.title != this.props.title) {
       this.setState({
-        feed: []
+        feed: [],
+        isDisplayingList: true
       }, this.updateFeedState)
     }
   }
