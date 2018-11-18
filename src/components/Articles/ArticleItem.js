@@ -26,7 +26,7 @@ class ArticleItem extends React.Component {
 
 
   render() {
-    console.log("item bookmarked?", this.props.bookmarked)
+
     const articleDate = `${(new Date(this.props.article.updated_date)).getMonth() + 1}/${(new Date(this.props.article.updated_date)).getDate()}/${(new Date(this.props.article.updated_date)).getFullYear()}`;
 
     return (

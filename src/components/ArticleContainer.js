@@ -6,7 +6,13 @@ import ArticleList from './Articles/ArticleList'
 class ArticleContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
+    if (prevProps.sections != this.props.sections) {
 
+    }
+
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.props.updateWireType(this.props.location.pathname.slice(1))
+    }
   }
 
 

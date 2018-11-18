@@ -33,6 +33,12 @@ class App extends Component {
     } )
   }
 
+  updateWireType = (type) => {
+    this.setState({
+      wireType: type
+    })
+  }
+
   onToggleBookmark = ( article ) => {
     debugger
     let slug = article.slug_name
@@ -76,7 +82,7 @@ class App extends Component {
     let viewedState = [...this.state.viewed]
 
     if (this.state.bookmarkIDs[slug]) {
-      console.log("the article is bookmarked")
+
       this.onToggleBookmark(article)
     }
 
@@ -111,13 +117,13 @@ class App extends Component {
 
       <Switch>
         <Route exact="exact" path='/latest' render={() => {
-            return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewedIDs={this.state.viewedIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
-              onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
+            return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewedIDs={this.state.viewedIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={["all"]}
+              onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} updateWireType={this.updateWireType}/>
           }}/>
 
           <Route exact="exact" path='/recommended' render={() => {
-              return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewed={this.state.viewed} viewedIDs={this.state.viewedIDs} bookmarks={this.state.bookmarks} sections={sectionList}
-                onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
+              return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewed={this.state.viewed} viewedIDs={this.state.viewedIDs} bookmarks={this.state.bookmarks} sections={Object.keys(this.state.interests)}
+                onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} updateWireType={this.updateWireType}/>
             }}/>
 
             <Redirect to='/latest'/>
