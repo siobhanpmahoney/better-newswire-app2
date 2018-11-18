@@ -5,6 +5,12 @@ class BookmarkItem extends React.Component {
   _onViewArticle = () => {
     this.props.onViewArticle(this.props.bookmark)
   }
+
+  _onToggleBookmark = () => {
+    this.props.onToggleBookmark(this.props.bookmark)
+  }
+
+
   render() {
     const {bookmark} = this.props
 
@@ -16,7 +22,7 @@ class BookmarkItem extends React.Component {
         </div>
         <div className="bookmark-item-top">
           <span className="bookmark-item-section">{bookmark.section}</span>
-          <span className="bookmark-item-button"> <button>x</button></span>
+          <span className="bookmark-item-button"> <button onClick={this._onToggleBookmark}>x</button></span>
         </div>
 
         <div className="bookmark-item-title" onClick={this._onViewArticle}>
