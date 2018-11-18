@@ -1,6 +1,10 @@
 import React from 'react'
 
 class BookmarkItem extends React.Component {
+
+  _onViewArticle = () => {
+    this.props.onViewArticle(this.props.bookmark)
+  }
   render() {
     const {bookmark} = this.props
 
@@ -10,11 +14,12 @@ class BookmarkItem extends React.Component {
         <div className="bookmark-img-section">
           <img src={bookmark.image} className="bookmark-img" />
         </div>
-        <div className="bookmark-item-section">
-          {bookmark.section}
+        <div className="bookmark-item-top">
+          <span className="bookmark-item-section">{bookmark.section}</span>
+          <span className="bookmark-item-button"> <button>x</button></span>
         </div>
 
-        <div className="bookmark-item-title">
+        <div className="bookmark-item-title" onClick={this._onViewArticle}>
           {bookmark.title}
         </div>
 

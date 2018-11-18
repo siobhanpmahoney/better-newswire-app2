@@ -14,7 +14,8 @@ class App extends Component {
 
     this.state = {
       wireType: "latest",
-      articleIDs: {},
+      bookmarkIDs: {},
+      viewedIDs: {},
       viewed: [],
       bookmarks: [],
       interests: {}
@@ -24,7 +25,8 @@ class App extends Component {
   componentDidMount() {
     this.setState( {
       wireType: "latest",
-      articleIDs: ls.get( 'articleIDs' ) || {},
+      bookmarkIDs: ls.get( 'bookmarkIDs' ) || {},
+      viewedIDs: ls.get( 'viewedIDs' ) || {},
       viewed: ls.get( 'viewed' ) || [],
       bookmarks: ls.get( 'bookmarks' ) || [],
       interests: ls.get( 'interests' ) || {}
@@ -32,38 +34,34 @@ class App extends Component {
   }
 
   onToggleBookmark = ( article ) => {
+    debugger
     let slug = article.slug_name
-    let articleIDsState = Object.assign( {}, this.state.articleIDs )
+    let bookmarkIDsState = Object.assign( {}, this.state.bookmarkIDs )
     let bookmarkedState = [...this.state.bookmarks]
     let interestsState = Object.assign( {}, this.state.interests )
 
-    if ( !articleIDsState[slug]) {
-      if (articleIDsState[ slug ] != "bookmarked" ) {
-        bookmarkedState = [article, ...bookmarkedState]
-        articleIDsState[slug] = "bookmarked"
-      }
-      if ( !interestsState[ article.section ] ) {
-        interestsState[ article.section ] = 1
-      } else {
-        interestsState[ article.section ] += 1
-      }
+    if (bookmarkIDsState[slug]) {
+      delete bookmarkIDsState[slug]
+      let articleIdx = bookmarkedState.indexOf( bookmarkedState.find( ( a ) => a.slug_name == slug ) )
+      bookmarkedState = [...bookmarkedState.slice( 0, articleIdx ),...bookmarkedState.slice( articleIdx + 1 )]
     } else {
-      if (articleIDsState[ slug ] == "bookmarked" ) {
-        delete articleIDsState[slug]
-        let articleIdx = bookmarkedState.indexOf( bookmarkedState.find( ( a ) => a.slug_name == slug ) )
-        bookmarkedState = [...bookmarkedState.slice( 0, articleIdx ),...bookmarkedState.slice( articleIdx + 1 )]
-      }
+      bookmarkedState = [article, ...bookmarkedState]
+      bookmarkIDsState[slug] = true
+    }
 
-
+    if ( !interestsState[ article.section ] ) {
+      interestsState[ article.section ] = 1
+    } else {
+      interestsState[ article.section ] += 1
     }
 
     this.setState({
-      articleIDs: articleIDsState,
+      bookmarkIDs: bookmarkIDsState,
       bookmarks: bookmarkedState,
       interests: interestsState
     })
 
-    ls.set( 'articleIDs', articleIDsState );
+    ls.set( 'bookmarkIDs', bookmarkIDsState );
     ls.set( 'bookmarks', bookmarkedState );
     ls.set( 'interests', interestsState );
   }
@@ -73,19 +71,17 @@ class App extends Component {
 
   onViewArticle = ( article ) => {
     let slug = article.slug_name
-    let articleIDsState = Object.assign( {}, this.state.articleIDs )
-    let viewedState = [...this.state.viewed]
+    let viewedIDsState = Object.assign( {}, this.state.viewedIDs )
     let interestsState = Object.assign( {}, this.state.interests )
-    let bookmarkedState = [...this.state.bookmarks]
+    let viewedState = [...this.state.viewed]
 
-    if (articleIDsState[slug] && articleIDsState[slug] == "bookmarked") {
-      let articleIdx = bookmarkedState.indexOf( bookmarkedState.find( ( a ) => a.slug_name == slug ) )
-      bookmarkedState = [...bookmarkedState.slice( 0, articleIdx ),...bookmarkedState.slice( articleIdx + 1 )]
+    if (this.state.bookmarkIDs[slug]) {
+      console.log("the article is bookmarked")
+      this.onToggleBookmark(article)
     }
 
-    articleIDsState[slug] = "viewed"
     viewedState = [article,... viewedState]
-
+    viewedIDsState[slug] = true
     if (!interestsState[article.section]) {
       interestsState[article.section] = 1
     } else {
@@ -93,22 +89,18 @@ class App extends Component {
     }
 
     this.setState({
-      articleIDs: articleIDsState,
+      viewedIDs: viewedIDsState,
       viewed: viewedState,
-      bookmarks: bookmarkedState,
       interests: interestsState
     }, () => window.open(article.url, '_blank'))
 
-    ls.set( 'articleIDs', articleIDsState );
-    ls.set( 'bookmarks', bookmarkedState );
+    ls.set( 'viewedIDs', viewedIDsState );
     ls.set( 'interests', interestsState );
     ls.set( 'viewed', viewedState );
-
-
   }
 
   render() {
-    let { articleIDs, viewed, bookmarks, interests } = this.state
+    let { bookmarkIDs, viewed, bookmarks, interests } = this.state
     let sectionList = this.state.wireType == "latest"
     ? [ "all" ]
     : this.state.interests
@@ -117,21 +109,21 @@ class App extends Component {
     <NavBar/>
     <div className="page-wrapper">
 
-    <Switch>
-      <Route exact="exact" path='/latest' render={() => {
-          return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
-            onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
-        }}/>
-
-        <Route exact="exact" path='/recommended' render={() => {
-            return <ArticleContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
+      <Switch>
+        <Route exact="exact" path='/latest' render={() => {
+            return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewedIDs={this.state.viewedIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} sections={sectionList}
               onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
           }}/>
 
-          <Redirect to='/latest'/>
+          <Route exact="exact" path='/recommended' render={() => {
+              return <ArticleContainer bookmarkIDs={this.state.bookmarkIDs} viewed={this.state.viewed} viewedIDs={this.state.viewedIDs} bookmarks={this.state.bookmarks} sections={sectionList}
+                onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark}/>
+            }}/>
 
-        </Switch>
-            <SidebarContainer articleIDs={this.state.articleIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} interests={this.state.interests} onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} />
+            <Redirect to='/latest'/>
+
+          </Switch>
+          <SidebarContainer bookmarkIDs={this.state.bookmarkIDs} viewed={this.state.viewed} bookmarks={this.state.bookmarks} interests={this.state.interests} onViewArticle={this.onViewArticle} viewedIDs={this.state.viewedIDs} onToggleBookmark={this.onToggleBookmark} />
         </div>
 
       </div> );

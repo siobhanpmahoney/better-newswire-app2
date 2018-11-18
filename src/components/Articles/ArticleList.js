@@ -19,7 +19,7 @@ class ArticleList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if ((Object.keys(prevProps.articleIDs) != Object.keys(this.props.articleIDs)) || (prevProps.bookmarked.length != this.props.bookmarked.length) || prevProps.viewed.length != this.props.viewed.length) {
+    if ((Object.keys(prevProps.bookmarkIDs) != Object.keys(this.props.bookmarkIDs)) || (prevProps.bookmarked.length != this.props.bookmarked.length) || prevProps.viewed.length != this.props.viewed.length) {
       this.renderFeed()
     }
   }
@@ -55,7 +55,7 @@ class ArticleList extends React.Component {
       <div className="article-list">
         <span className="list-title">{this.props.title.toUpperCase()}</span>
       {this.renderFeed().map((a) => {
-        return <ArticleItem article={a} onToggleBookmark={this.props.onToggleBookmark} bookmarked={!!this.props.articleIDs[a.slug_name] && this.props.articleIDs[a.slug_name] == "bookmarked"}/>
+        return <ArticleItem article={a} on onToggleBookmark={this.props.onToggleBookmark} onViewArticle={this.props.onViewArticle} bookmarked={!!this.props.bookmarkIDs[a.slug_name]}/>
       })}
     </div>
   )

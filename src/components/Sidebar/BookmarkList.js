@@ -7,7 +7,7 @@ class BookmarkList extends React.Component {
       <div className="bookmark-list">
         <div className="sidebar-header">Bookmarks</div>
         {this.props.bookmarks.map((bookmark) => {
-          return <BookmarkItem bookmark={bookmark} key={bookmark.slug} onViewArticle={this.onViewArticle} onToggleBookmark={this.onToggleBookmark} />
+          return <BookmarkItem bookmark={bookmark} key={bookmark.slug} onViewArticle={this.props.onViewArticle} onToggleBookmark={this.onToggleBookmark} />
         })}
       </div>
     )

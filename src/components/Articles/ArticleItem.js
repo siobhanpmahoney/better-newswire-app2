@@ -12,6 +12,10 @@ class ArticleItem extends React.Component {
     this.props.onToggleBookmark(this.props.article)
   }
 
+  _onViewArticle = () => {
+    this.props.onViewArticle(this.props.article)
+  }
+
   dynamicIcon = () => {
     if (this.props.bookmarked) {
       return (<i className="material-icons bookmark" id={this.props.article.slug_name}>bookmark</i>)
@@ -41,8 +45,7 @@ class ArticleItem extends React.Component {
               {this.props.article.section}
             </div>
 
-            <div className="article-item-title" id={this.props.article.slug_name} onClick={this.props.viewArticle}>
-              {this.props.article.title}
+            <div className="article-item-title" id={this.props.article.slug_name} onClick={this._onViewArticle}> {this.props.article.title}
             </div>
 
             <div className="article-item-abstract">
