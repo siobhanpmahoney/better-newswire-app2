@@ -9,7 +9,8 @@ class ArticleList extends React.Component {
     super(props)
 
     this.state = {
-      feed: []
+      feed: [],
+      isDisplayingList: true
     }
   }
 
@@ -56,16 +57,32 @@ class ArticleList extends React.Component {
     this.interval = setInterval(() => this.updateFeedState(), 10000)
   }
 
+  hideList = () => {
+    let displayState = !this.state.isDisplayingList
+    this.setState({
+      isDisplayingList: displayState
+    })
+  }
+
 
   render() {
+    let display = !!this.state.isDisplayingList ? "block" : "none"
+    let buttonText = !!this.state.isDisplayingList ? "-" : "+"
+    let buttonStyle = this.props.title == "latest" ? "none" : "inline"
     return (
       <div className="article-list">
         <span className="list-title">
           {this.props.title.toUpperCase()}
+          <button className="feed-list-expand-button" onClick={this.hideList} style={{display: `${buttonStyle}`}}>
+            {buttonText}
+          </button>
         </span>
+        <div className="article-list" style={{display: `${display}`}}>
       {this.renderFeed().map((a) => {
         return <ArticleItem article={a} on onToggleBookmark={this.props.onToggleBookmark} onViewArticle={this.props.onViewArticle} bookmarked={!!this.props.bookmarkIDs[a.slug_name]}/>
+
       })}
+              </div>
     </div>
   )
 }
