@@ -32,6 +32,8 @@ class ArticleItem extends React.Component {
     return (
       <div className="article-item-wrapper">
         <div className="article-item-container">
+          <div className="article-item-content">
+
 
           <div className="article-item-img-section">
             <img src={this.props.article.image} alt="" className="article-item-img" />
@@ -45,7 +47,8 @@ class ArticleItem extends React.Component {
               {this.props.article.section}
             </div>
 
-            <div className="article-item-title" id={this.props.article.slug_name} onClick={this._onViewArticle}> {this.props.article.title}
+            <div className="article-item-title" id={this.props.article.slug_name} onClick={this._onViewArticle}>
+              {this.props.article.title}
             </div>
 
             <div className="article-item-abstract">
@@ -62,12 +65,14 @@ class ArticleItem extends React.Component {
                   {this.dynamicIcon()}
                 </button>
               </span>
+
+
             </div>
           </div>
 
 
 
-
+        </div>
         </div>
 
 
