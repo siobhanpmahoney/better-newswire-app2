@@ -13,6 +13,32 @@
   color: #ffe697;
 }
 
+#light-blue {
+  color: #62aaff;
+}
+
+/* light periwinkle blue => indigo */
+
+#indigo .light-medium {
+  color: #5474db
+}
+
+#indigo .medium {
+  color: #2c54d3
+}
+
+#indigo .light {
+  color: #617fde;
+}
+
+
+#indigo {
+  color:
+}
+
+#indigio .charcoal {
+  color: #272b35;
+}
 
 
 
@@ -47,4 +73,31 @@
 
 #green .light {
   color: #87d1c3;
+}
+
+/* GREYS */
+
+#grey inturn.light {
+  color: #a7b8ca;
+}
+
+#grey inturn.medium-dark {
+  color: #43566a;
+}
+
+#grey inturn.light-medium {
+  color: #a1a9b3;
+}
+
+#grey ken.medium-light {
+  color: #83869f;
+}
+
+#grey ken.medium-dark {
+  color: #40445e;
+}
+
+
+#grey .medium {
+  color: #43566a;
 }

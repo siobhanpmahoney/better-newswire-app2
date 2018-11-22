@@ -84,12 +84,12 @@ class ArticleList extends React.Component {
     let buttonStyle = this.props.title == "latest" ? "none" : "inline"
     return (
       <div className="article-list">
-        <span className="list-title">
+        <div className="list-title">
           {this.props.title.toUpperCase()}
           <button className="feed-list-expand-button" onClick={this.hideList} style={{display: `${buttonStyle}`}}>
             {buttonText}
           </button>
-        </span>
+        </div>
         <div className="article-list" style={{display: `${display}`}}>
       {this.renderFeed().map((a) => {
         return <ArticleItem key={a.slug_name + " " + a.updated_date} article={a} onToggleBookmark={this.props.onToggleBookmark} onViewArticle={this.props.onViewArticle} bookmarked={!!this.props.bookmarkIDs[a.slug_name]}/>
